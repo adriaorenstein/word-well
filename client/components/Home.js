@@ -5,11 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 class Home extends React.Component {
     render() {
         return (
-            <div>
-                <h2>Welcome to Word Well!</h2>
-                <Link to='/form-home'>Add a New Entry</Link>
-                <br />
-                <Link to='/generator-home'>Start a Sprint</Link>
+            <div className="bg-home">
             </div>
         )
     }

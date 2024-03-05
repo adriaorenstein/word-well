@@ -15,7 +15,7 @@ import store from './reducers';
 class App extends React.Component {
     render() {
         return (
-            <div>
+            <div className="nav-home">
                 <BrowserRouter>
                     <Nav_Bar />
                     <Routes>
