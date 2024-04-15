@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import char_generator from './char_generator';
+import games from './games';
 //import {thunkMiddleware} from 'redux-thunk';
 import { thunk } from 'redux-thunk'
 

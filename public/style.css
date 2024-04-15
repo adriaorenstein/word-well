@@ -1,8 +1,10 @@
 body, html, #app, #app>div {
-    height: 108%;
+    /* height: 108%; */
+    height: 100%;
     margin: 0;
     background-size: 100%;
-    background-image: url("assets/bg_home_blur_2.jpg");
+    /* background-image: url("assets/bg_home_blur_2.jpg"); */
+    /* background-image: url("assets/test_home.png"); */
 }
 
 .nav-bar {
@@ -33,27 +35,35 @@ body, html, #app, #app>div {
 }
 
 .nav-btn-home {
-    background-image: url("assets/home_btn.jpg");
+    background-image: url("assets/nav/home_btn.jpg");
 }
 
 .nav-btn-home:hover {
-    background-image: url("assets/home_btn_hov.jpg");
+    background-image: url("assets/nav/home_btn_hov.jpg");
 }
 
 .nav-btn-generate {
-    background-image: url("assets/generate_btn.jpg");
+    background-image: url("assets/nav/generate_btn.jpg");
 }
 
 .nav-btn-generate:hover {
-    background-image: url("assets/generate_btn_hov.jpg");
+    background-image: url("assets/nav/generate_btn_hov.jpg");
 }
 
 .nav-btn-contribute {
-    background-image: url("assets/contribute_btn.jpg");
+    background-image: url("assets/nav/contribute_btn.jpg");
 }
 
 .nav-btn-contribute:hover {
-    background-image: url("assets/contribute_btn_hov.jpg");
+    background-image: url("assets/nav/contribute_btn_hov.jpg");
+}
+
+.nav-btn-games {
+    background-image: url("assets/nav/games_btn.jpg");
+}
+
+.nav-btn-games:hover {
+    background-image: url("assets/nav/games_btn_hov.jpg");
 }
 
 .bg-home {
@@ -62,4 +72,27 @@ body, html, #app, #app>div {
     height: 100%;
     width: 100%;
     background-size: 100%;
+}
+
+.bg-generator {
+    background-image: url("assets/bg_generator.jpg");
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    background-size: 100%;
+}
+
+.generator-text {
+    padding-top: 5%;
+    padding-left: 14%;
+}
+
+.generator-label {
+    font-weight: bold;
+    font-size: large;
+}
+
+.generator-line {
+    width: 30%;
+    margin-left: 0%;
 }
