@@ -6,8 +6,7 @@ class Generator_Home extends React.Component {
     render() {
         return (
             <div className="bg-generator">
-                <div>Start a sprint</div>
-                <Link to='/char-generator'>Generate a Character</Link>
+                <Link to='/char-generator'><img src="assets/gen_char.png" className="gen-btn gen-btn-char" /></Link>
             </div>
         )
     }

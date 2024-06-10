@@ -5,7 +5,10 @@ import { Link, Outlet } from 'react-router-dom';
 class Home extends React.Component {
     render() {
         return (
-            <div className="bg-home">
+            <div>
+                <img src="/assets/bg_home.png" className="bg-generator-img" />
+                <div className="bg-home">
+                </div>
             </div>
         )
     }

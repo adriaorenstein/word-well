@@ -1,10 +1,15 @@
 import axios from 'axios';
 
 const GET_NEW_CHARACTER = "GET_NEW_CHARACTER";
+const CLEAR_CHARACTERS = "CLEAR_CHARACTERS";
 
 const gotNewCharacter = (new_char) => ({
     type: GET_NEW_CHARACTER,
     new_char
+})
+
+const clearingCharacters = () => ({
+    type: CLEAR_CHARACTERS
 })
 
 export const fetchNewCharacter = () => async (dispatch) => {
@@ -13,6 +18,14 @@ export const fetchNewCharacter = () => async (dispatch) => {
         dispatch(gotNewCharacter(data));
     } catch (err) {
         console.log('error fetching char entry');
+    }
+}
+
+export const clearCharacters = () => async (dispatch) => {
+    try {
+        dispatch(clearingCharacters());
+    } catch (err) {
+        console.log('error clearing characters');
     }
 }
 
@@ -55,6 +68,8 @@ export default function (state = initialState, action) {
     switch(action.type) {
         case GET_NEW_CHARACTER:
             return { ...state, new_char: action.new_char }
+        case CLEAR_CHARACTERS:
+            return { initialState }
         default:
             return state;
     }
