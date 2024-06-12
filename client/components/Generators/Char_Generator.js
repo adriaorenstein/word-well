@@ -3,114 +3,139 @@ import { fetchNewCharacter, clearCharacters } from '../../reducers/char_generato
 import { connect } from 'react-redux';
 
 class Char_Generator extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            chars: []
+        };
+
+        this.genNewChar = this.genNewChar.bind(this);
+    }
+
     componentDidMount() {
        this.props.clearCharacters();
     }
+
+    async genNewChar() {   
+        await this.props.fetchNewCharacter();
+        console.log(this.props.new_char);
+        this.setState ({
+            chars: [...this.state.chars, this.props.new_char]
+        })
+    }
+
     render() {
+        console.log(this.state.chars);
         return (
             <div>
                 <img src="/assets/bg_generator.png" className="bg-generator-img" />
             <div className="bg-generator">
                 <div className="generator-page">
-                    <div onClick={() => this.props.fetchNewCharacter()}><img src="assets/gen_char.png" className="gen-btn gen-btn-char" /></div>
+                    <div onClick={() => this.genNewChar()}><img src="assets/gen_char.png" className="gen-btn gen-btn-char" /></div>
                         {(this.props.new_char) ?
                         <div className="generator-text">
-                        <div className="single-char">
-                            <div className="bold-names">
-                            {this.props.new_char.first_name[0]} {this.props.new_char.last_name[0]} 
-                            </div> is 10 years old and {this.props.new_char.gender[0]}.
-                            They are {this.props.new_char.phys_traits.map((trait, i) => {
+                            { this.state.chars.map((char, i) => {
                                 return (
-                                    <span key={i}>
-                                        <span>{trait}</span>
-                                        {i === (this.props.new_char.phys_traits.length - 1) 
-                                        ? <span>. </span>
-                                        : i === (this.props.new_char.phys_traits.length - 2)
-                                            ? <span> and </span>
-                                            : <span>, </span>
-                                        }
-                                    </span>
+                                    <div key={i}>
+                                        <div className="single-char">
+                                            <div className="bold-names">
+                                            {char.first_name[0]} {char.last_name[0]} 
+                                            </div> is 10 years old and {char.gender[0]}.
+                                            They are {char.phys_traits.map((trait, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <span>{trait}</span>
+                                                        {i === (char.phys_traits.length - 1) 
+                                                        ? <span>. </span>
+                                                        : i === (char.phys_traits.length - 2)
+                                                            ? <span> and </span>
+                                                            : <span>, </span>
+                                                        }
+                                                    </span>
+                                                )
+                                            })}
+                                            Others would describe them as {char.char_traits.map((trait, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <span>{trait}</span>
+                                                        {i === (char.char_traits.length - 1) 
+                                                        ? <span>. </span>
+                                                        : i === (char.char_traits.length - 2)
+                                                            ? <span> and </span>
+                                                            : <span>, </span>
+                                                        }
+                                                    </span>
+                                                )
+                                            })}
+                                            They enjoy {char.likes.map((trait, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <span>{trait}</span>
+                                                        {i === (char.likes.length - 1) 
+                                                        ? <span> </span>
+                                                        : i === (char.likes.length - 2)
+                                                            ? <span> and </span>
+                                                            : <span>, </span>
+                                                        }
+                                                    </span>
+                                                )
+                                            })} but dislike {char.dislikes.map((trait, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <span>{trait}</span>
+                                                        {i === (char.dislikes.length - 1) 
+                                                        ? <span>. </span>
+                                                        : i === (char.dislikes.length - 2)
+                                                            ? <span> and </span>
+                                                            : <span>, </span>
+                                                        }
+                                                    </span>
+                                                )
+                                            })} 
+                                            They are skilled at {char.skills.map((trait, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <span>{trait}</span>
+                                                        {i === (char.skills.length - 1) 
+                                                        ? <span>. </span>
+                                                        : i === (char.skills.length - 2)
+                                                            ? <span> and </span>
+                                                            : <span>, </span>
+                                                        }
+                                                    </span>
+                                                )
+                                            })}
+                                            They are motivated by {char.motivator.map((trait, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <span>{trait}</span>
+                                                        {i === (char.motivator.length - 1) 
+                                                        ? <span>. </span>
+                                                        : i === (char.motivator.length - 2)
+                                                            ? <span> and </span>
+                                                            : <span>, </span>
+                                                        }
+                                                    </span>
+                                                )
+                                            })}
+                                            A unique quirk about them is that they {char.wildcard.map((trait, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <span>{trait}</span>
+                                                        {i === (char.wildcard.length - 1) 
+                                                        ? <span>. </span>
+                                                        : i === (char.wildcard.length - 2)
+                                                            ? <span> and </span>
+                                                            : <span>, </span>
+                                                        }
+                                                    </span>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
                                 )
                             })}
-                            Others would describe them as {this.props.new_char.char_traits.map((trait, i) => {
-                                return (
-                                    <span key={i}>
-                                        <span>{trait}</span>
-                                        {i === (this.props.new_char.char_traits.length - 1) 
-                                        ? <span>. </span>
-                                        : i === (this.props.new_char.char_traits.length - 2)
-                                            ? <span> and </span>
-                                            : <span>, </span>
-                                        }
-                                    </span>
-                                )
-                            })}
-                            They enjoy {this.props.new_char.likes.map((trait, i) => {
-                                return (
-                                    <span key={i}>
-                                        <span>{trait}</span>
-                                        {i === (this.props.new_char.likes.length - 1) 
-                                        ? <span> </span>
-                                        : i === (this.props.new_char.likes.length - 2)
-                                            ? <span> and </span>
-                                            : <span>, </span>
-                                        }
-                                    </span>
-                                )
-                            })} but dislike {this.props.new_char.dislikes.map((trait, i) => {
-                                return (
-                                    <span key={i}>
-                                        <span>{trait}</span>
-                                        {i === (this.props.new_char.dislikes.length - 1) 
-                                        ? <span>. </span>
-                                        : i === (this.props.new_char.dislikes.length - 2)
-                                            ? <span> and </span>
-                                            : <span>, </span>
-                                        }
-                                    </span>
-                                )
-                            })} 
-                            They are skilled at {this.props.new_char.skills.map((trait, i) => {
-                                return (
-                                    <span key={i}>
-                                        <span>{trait}</span>
-                                        {i === (this.props.new_char.skills.length - 1) 
-                                        ? <span>. </span>
-                                        : i === (this.props.new_char.skills.length - 2)
-                                            ? <span> and </span>
-                                            : <span>, </span>
-                                        }
-                                    </span>
-                                )
-                            })}
-                            They are motivated by {this.props.new_char.motivator.map((trait, i) => {
-                                return (
-                                    <span key={i}>
-                                        <span>{trait}</span>
-                                        {i === (this.props.new_char.motivator.length - 1) 
-                                        ? <span>. </span>
-                                        : i === (this.props.new_char.motivator.length - 2)
-                                            ? <span> and </span>
-                                            : <span>, </span>
-                                        }
-                                    </span>
-                                )
-                            })}
-                            A unique quirk about them is that they {this.props.new_char.wildcard.map((trait, i) => {
-                                return (
-                                    <span key={i}>
-                                        <span>{trait}</span>
-                                        {i === (this.props.new_char.wildcard.length - 1) 
-                                        ? <span>. </span>
-                                        : i === (this.props.new_char.wildcard.length - 2)
-                                            ? <span> and </span>
-                                            : <span>, </span>
-                                        }
-                                    </span>
-                                )
-                            })}
-                        </div>
-                        </div>
+                            </div>
                         : <div></div>
                     }
                 </div>

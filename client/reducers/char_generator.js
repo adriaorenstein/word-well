@@ -44,7 +44,6 @@ export const setCharEntry = (entry_vals, db_name) => async (dispatch) => {
             });
         }
     } catch (err) {
-        alert('error in reducer');
         console.log('error setting char entry');
     }
 }
