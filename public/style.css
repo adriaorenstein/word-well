@@ -231,13 +231,14 @@ body, html, #app, #app>div {
 
     text-align: left;
     font-family: Georgia, 'Times New Roman', Times, serif;
+
+    overflow: scroll;
 }
 
 .generator-text {
-    flex-basis: content;
-
     display: flex;
     flex-direction: column;
+    flex-basis: content;
 }
 
 .single-char {
@@ -289,4 +290,10 @@ body, html, #app, #app>div {
     background-size: 100%;
     position: absolute;
     cursor: pointer;
+}
+
+.gen-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
 }

@@ -18,10 +18,18 @@ class Char_Generator extends React.Component {
 
     async genNewChar() {   
         await this.props.fetchNewCharacter();
-        console.log(this.props.new_char);
         this.setState ({
             chars: [...this.state.chars, this.props.new_char]
         })
+    }
+
+    async regenChar() {
+        if (this.state.chars.length > 0) {
+            this.setState({
+                chars: this.state.chars.slice(0, -1)
+            })
+            this.genNewChar();
+        }
     }
 
     render() {
@@ -31,7 +39,10 @@ class Char_Generator extends React.Component {
                 <img src="/assets/bg_generator.png" className="bg-generator-img" />
             <div className="bg-generator">
                 <div className="generator-page">
-                    <div onClick={() => this.genNewChar()}><img src="assets/gen_char.png" className="gen-btn gen-btn-char" /></div>
+                    <div className="gen-btns">
+                        <div onClick={() => this.genNewChar()}><img src="assets/gen_char.png" className="gen-btn" /></div>
+                        <div onClick={() => this.regenChar()}><img src="assets/regen_last.png" className="gen-btn" /></div>
+                    </div>
                         {(this.props.new_char) ?
                         <div className="generator-text">
                             { this.state.chars.map((char, i) => {
