@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const GET_NEW_CHARACTER = "GET_NEW_CHARACTER";
 const CLEAR_CHARACTERS = "CLEAR_CHARACTERS";
+const GET_PLOT_WORD = "GET_PLOT_WORD";
 
 const gotNewCharacter = (new_char) => ({
     type: GET_NEW_CHARACTER,
@@ -10,6 +11,11 @@ const gotNewCharacter = (new_char) => ({
 
 const clearingCharacters = () => ({
     type: CLEAR_CHARACTERS
+})
+
+const gotPlotWord = (word) => ({
+    type: GET_PLOT_WORD,
+    word
 })
 
 export const fetchNewCharacter = () => async (dispatch) => {
@@ -48,6 +54,15 @@ export const setCharEntry = (entry_vals, db_name) => async (dispatch) => {
     }
 }
 
+export const fetchPlotWord = () => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/api/plot_generator/get-plot-word`);
+        dispatch(gotPlotWord(data));
+    } catch (err) {
+        console.log('error fetching plot word');
+    }
+}
+
 const initialState = {
     new_char: {
         gender: [],
@@ -60,6 +75,9 @@ const initialState = {
         phys_traits: [],
         skills: [],
         wildcard: []
+    },
+    plot: {
+        word: ''
     }
 }
 
@@ -69,6 +87,11 @@ export default function (state = initialState, action) {
             return { ...state, new_char: action.new_char }
         case CLEAR_CHARACTERS:
             return { initialState }
+        case GET_PLOT_WORD:
+            return { ...state, plot: {
+                ...state.plot,
+                word: action.word
+            }}
         default:
             return state;
     }

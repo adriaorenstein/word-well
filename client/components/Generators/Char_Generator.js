@@ -1,12 +1,14 @@
 import React from 'react';
-import { fetchNewCharacter, clearCharacters } from '../../reducers/char_generator';
+import { fetchNewCharacter, clearCharacters, fetchPlotWord } from '../../reducers/char_generator';
+
 import { connect } from 'react-redux';
 
 class Char_Generator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            chars: []
+            chars: [],
+            plot_words: []
         };
 
         this.genNewChar = this.genNewChar.bind(this);
@@ -32,8 +34,20 @@ class Char_Generator extends React.Component {
         }
     }
 
+    async genPlot() {
+        await this.props.fetchPlotWord();
+        console.log(this.props.plot);
+        this.setState ({
+            plot_words: [...this.state.plot_words, this.props.plot.word.element]
+        })
+    }
+
+    getAge() {
+        return (Math.floor(Math.random() * 101));
+    }
+
     render() {
-        console.log(this.state.chars);
+        console.log(this.state.plot_words);
         return (
             <div>
                 <img src="/assets/bg_generator.png" className="bg-generator-img" />
@@ -42,7 +56,24 @@ class Char_Generator extends React.Component {
                     <div className="gen-btns">
                         <div onClick={() => this.genNewChar()}><img src="assets/gen_char.png" className="gen-btn" /></div>
                         <div onClick={() => this.regenChar()}><img src="assets/regen_last.png" className="gen-btn" /></div>
+                        <div onClick={() => this.genPlot()}><img src="assets/gen_plot.png" className="gen-btn" /></div>
                     </div>
+                        {(this.state.plot_words) ?
+                        <div>
+                            { this.state.plot_words.map((word, i) => {
+                                return (
+                                    <div key={i}>
+                                        <div className="plot">
+                                            {word}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        :
+                        <div></div>
+                        }
+
                         {(this.props.new_char) ?
                         <div className="generator-text">
                             { this.state.chars.map((char, i) => {
@@ -51,7 +82,7 @@ class Char_Generator extends React.Component {
                                         <div className="single-char">
                                             <div className="bold-names">
                                             {char.first_name[0]} {char.last_name[0]} 
-                                            </div> is 10 years old and {char.gender[0]}.
+                                            </div> is {this.getAge()} years old and {char.gender[0]}.
                                             They are {char.phys_traits.map((trait, i) => {
                                                 return (
                                                     <span key={i}>
@@ -173,14 +204,16 @@ const mapStateToProps = (state) => {
         //     })
         // })}</h5>
 
-        new_char: state.char_generator.new_char
+        new_char: state.char_generator.new_char,
+        plot: state.char_generator.plot
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchNewCharacter: () => dispatch(fetchNewCharacter()),
-        clearCharacters: () => dispatch(clearCharacters())
+        clearCharacters: () => dispatch(clearCharacters()),
+        fetchPlotWord: () => dispatch(fetchPlotWord())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Char_Generator);

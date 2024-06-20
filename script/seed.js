@@ -9,6 +9,8 @@ const { Phys_Traits } = require('../server/db/models/phys_traits');
 const { Skills } = require('../server/db/models/skills');
 const { Wildcards } = require('../server/db/models/wildcards');
 
+const { Plot_Words } = require('../server/db/models/plot_words');
+
 const characters_data = [
     {
         name: `Testy McTestPants`,
@@ -609,6 +611,48 @@ const wildcards_data = [
     { element: 'are thinking of running away' },
 ]
 
+
+
+const plot_words_data = [
+    { element: 'ship' },
+    { element: 'museum' },
+    { element: 'frat bro' },
+    { element: 'a mistake' },
+    { element: 'fireworks' },
+    { element: 'attack' },
+    { element: 'fish' },
+    { element: 'air horn' },
+    { element: 'jeans' },
+    { element: 'crash' },
+    { element: 'child' },
+    { element: 'ear' },
+    { element: 'worm' },
+    { element: 'parasite' },
+    { element: 'boulder' },
+    { element: 'pirate' },
+    { element: 'agitation' },
+    { element: 'map' },
+    { element: 'ski mask' },
+    { element: 'spirit' },
+    { element: 'tour guide' },
+    { element: 'vampire' },
+    { element: 'pickup truck' },
+    { element: 'alabama' },
+    { element: 'beach house' },
+    { element: 'vulture' },
+    { element: 'alien' },
+    { element: 'bloom' },
+    { element: 'jungle' },
+    { element: 'carpenter' },
+    { element: 'elevator' },
+    { element: 'chihuahua' },
+    { element: 'blood' },
+    { element: 'booger' },
+    { element: 'egg' },
+]
+
+
+
 async function seed() {
     await db.sync({ force: true });
     console.log('db synced!');
@@ -639,6 +683,10 @@ async function seed() {
     }
     for (wildcard of wildcards_data) {
         await Wildcards.create(wildcard);
+    }
+
+    for (word of plot_words_data) {
+        await Plot_Words.create(word);
     }
 }
 
