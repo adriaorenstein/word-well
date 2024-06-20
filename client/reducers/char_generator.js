@@ -65,7 +65,9 @@ export const fetchPlotWord = () => async (dispatch) => {
 
 const initialState = {
     new_char: {
+        type: 'char',
         gender: [],
+        age: 0,
         char_traits: [],
         first_name: [],
         last_name: [],
@@ -77,6 +79,7 @@ const initialState = {
         wildcard: []
     },
     plot: {
+        type: 'plot',
         word: ''
     }
 }

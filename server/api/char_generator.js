@@ -12,6 +12,10 @@ const { Sequelize } = require('sequelize');
 const Op = Sequelize.Op;
 const db = require('../db');
 
+function getAge() {
+    return (Math.floor(Math.random() * 101));
+}
+
 router.get('/get-char-trait', async function(req, res, next) {
     try {
         const trait = await Char_Traits.findAll({
@@ -109,7 +113,9 @@ router.get('/get-new-character', async function(req, res, next) {
         let dislikes = likes_dislikes_extracted.slice(likes_dislikes_extracted.length/2);
 
         res.json({
+            type: 'char',
             gender: [selected_gender],
+            age: getAge(),
             char_traits: extract_data_vals(char_traits),
             first_name: extract_data_vals(first_name),  
             last_name: extract_data_vals(last_name), 

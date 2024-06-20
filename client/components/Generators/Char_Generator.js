@@ -7,11 +7,14 @@ class Char_Generator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            chars: [],
-            plot_words: []
+            // chars: [],
+            // plot_words: []
+            text: []
         };
 
         this.genNewChar = this.genNewChar.bind(this);
+        this.regenLast = this.regenLast.bind(this);
+        this.genPlot = this.genPlot.bind(this);
     }
 
     componentDidMount() {
@@ -21,33 +24,33 @@ class Char_Generator extends React.Component {
     async genNewChar() {   
         await this.props.fetchNewCharacter();
         this.setState ({
-            chars: [...this.state.chars, this.props.new_char]
+            text: [...this.state.text, this.props.new_char]
         })
     }
 
-    async regenChar() {
-        if (this.state.chars.length > 0) {
+    async regenLast() {
+        if (this.state.text.length > 0) {
+            let type = this.state.text[this.state.text.length - 1].type;
             this.setState({
-                chars: this.state.chars.slice(0, -1)
+                text: this.state.text.slice(0, -1)
             })
-            this.genNewChar();
+            if (type === 'plot') {
+                this.genPlot();
+            }
+            else {
+                this.genNewChar();
+            }
         }
     }
 
     async genPlot() {
         await this.props.fetchPlotWord();
-        console.log(this.props.plot);
         this.setState ({
-            plot_words: [...this.state.plot_words, this.props.plot.word.element]
+            text: [...this.state.text, this.props.plot.word]
         })
     }
 
-    getAge() {
-        return (Math.floor(Math.random() * 101));
-    }
-
     render() {
-        console.log(this.state.plot_words);
         return (
             <div>
                 <img src="/assets/bg_generator.png" className="bg-generator-img" />
@@ -55,10 +58,126 @@ class Char_Generator extends React.Component {
                 <div className="generator-page">
                     <div className="gen-btns">
                         <div onClick={() => this.genNewChar()}><img src="assets/gen_char.png" className="gen-btn" /></div>
-                        <div onClick={() => this.regenChar()}><img src="assets/regen_last.png" className="gen-btn" /></div>
+                        <div onClick={() => this.regenLast()}><img src="assets/regen_last.png" className="gen-btn" /></div>
                         <div onClick={() => this.genPlot()}><img src="assets/gen_plot.png" className="gen-btn" /></div>
                     </div>
-                        {(this.state.plot_words) ?
+                        {(this.state.text) ?
+                        <div>
+                            { this.state.text.map((item, i) => {
+                                return (
+                                    <div key={i}>
+                                        { item.type == 'plot' ?
+                                            <div className="single-plot">
+                                                { item.word }
+                                            </div>
+                                        :
+                                            <div>
+                                                <div className="single-char">
+                                                    <div className="bold-names">
+                                                    {item.first_name} {item.last_name} 
+                                                    </div> is {item.age} years old and {item.gender[0]}.
+                                                    They are {item.phys_traits.map((trait, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                <span>{trait}</span>
+                                                                {i === (item.phys_traits.length - 1) 
+                                                                ? <span>. </span>
+                                                                : i === (item.phys_traits.length - 2)
+                                                                    ? <span> and </span>
+                                                                    : <span>, </span>
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })}
+                                                    Others would describe them as {item.char_traits.map((trait, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                <span>{trait}</span>
+                                                                {i === (item.char_traits.length - 1) 
+                                                                ? <span>. </span>
+                                                                : i === (item.char_traits.length - 2)
+                                                                    ? <span> and </span>
+                                                                    : <span>, </span>
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })}
+                                                    They enjoy {item.likes.map((trait, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                <span>{trait}</span>
+                                                                {i === (item.likes.length - 1) 
+                                                                ? <span> </span>
+                                                                : i === (item.likes.length - 2)
+                                                                    ? <span> and </span>
+                                                                    : <span>, </span>
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })} but dislike {item.dislikes.map((trait, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                <span>{trait}</span>
+                                                                {i === (item.dislikes.length - 1) 
+                                                                ? <span>. </span>
+                                                                : i === (item.dislikes.length - 2)
+                                                                    ? <span> and </span>
+                                                                    : <span>, </span>
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })} 
+                                                    They are skilled at {item.skills.map((trait, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                <span>{trait}</span>
+                                                                {i === (item.skills.length - 1) 
+                                                                ? <span>. </span>
+                                                                : i === (item.skills.length - 2)
+                                                                    ? <span> and </span>
+                                                                    : <span>, </span>
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })}
+                                                    They are motivated by {item.motivator.map((trait, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                <span>{trait}</span>
+                                                                {i === (item.motivator.length - 1) 
+                                                                ? <span>. </span>
+                                                                : i === (item.motivator.length - 2)
+                                                                    ? <span> and </span>
+                                                                    : <span>, </span>
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })}
+                                                    A unique quirk about them is that they {item.wildcard.map((trait, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                <span>{trait}</span>
+                                                                {i === (item.wildcard.length - 1) 
+                                                                ? <span>. </span>
+                                                                : i === (item.wildcard.length - 2)
+                                                                    ? <span> and </span>
+                                                                    : <span>, </span>
+                                                                }
+                                                            </span>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        : <div></div>
+                        }
+
+
+                        {/* {(this.state.plot_words) ?
                         <div>
                             { this.state.plot_words.map((word, i) => {
                                 return (
@@ -72,9 +191,9 @@ class Char_Generator extends React.Component {
                         </div>
                         :
                         <div></div>
-                        }
+                        } */}
 
-                        {(this.props.new_char) ?
+                        {/* {(this.props.new_char) ?
                         <div className="generator-text">
                             { this.state.chars.map((char, i) => {
                                 return (
@@ -179,7 +298,7 @@ class Char_Generator extends React.Component {
                             })}
                             </div>
                         : <div></div>
-                    }
+                    } */}
                 </div>
             </div>
             </div>

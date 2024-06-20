@@ -297,3 +297,8 @@ body, html, #app, #app>div {
     flex-direction: row;
     gap: 100px;
 }
+
+.single-plot {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
