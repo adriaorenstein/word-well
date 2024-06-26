@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 
-class Nav_Bar_Home extends React.Component {
+class Nav_Bar extends React.Component {
     render() {
         return (
             <div className="nav-bar">
@@ -12,12 +12,12 @@ class Nav_Bar_Home extends React.Component {
                 <Link to='/char-generator'>
                     <img src="assets/transparent.png" className="nav-btn nav-btn-generate" />
                 </Link>
-                <Link to='/form-home'>
+                {/* <Link to='/form-home'>
                     <img src="assets/transparent.png" className="nav-btn nav-btn-contribute" />
                 </Link>
                 <Link to='/games-home'>
                     <img src="assets/transparent.png" className="nav-btn nav-btn-games" />
-                </Link>
+                </Link> */}
             </div>
         )
     }
@@ -34,4 +34,4 @@ const mapDispatchToProps = (dispatch) => {
         // fetchCharTrait: () => dispatch(fetchCharTrait())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Nav_Bar_Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Nav_Bar);

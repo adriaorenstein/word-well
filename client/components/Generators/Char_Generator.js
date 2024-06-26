@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchNewCharacter, clearCharacters, fetchPlotWord } from '../../reducers/char_generator';
+import { fetchNewCharacter, clearCharacters, fetchPlotWord, fetchPlotPoint } from '../../reducers/char_generator';
 
 import { connect } from 'react-redux';
 
@@ -14,7 +14,8 @@ class Char_Generator extends React.Component {
 
         this.genNewChar = this.genNewChar.bind(this);
         this.regenLast = this.regenLast.bind(this);
-        this.genPlot = this.genPlot.bind(this);
+        this.genPlotWord = this.genPlotWord.bind(this);
+        this.genPlotPoint = this.genPlotPoint.bind(this);
     }
 
     componentDidMount() {
@@ -34,8 +35,11 @@ class Char_Generator extends React.Component {
             this.setState({
                 text: this.state.text.slice(0, -1)
             })
-            if (type === 'plot') {
-                this.genPlot();
+            if (type === 'plot_word') {
+                this.genPlotWord();
+            }
+            else if (type == 'plot_point') {
+                this.genPlotPoint();
             }
             else {
                 this.genNewChar();
@@ -43,10 +47,18 @@ class Char_Generator extends React.Component {
         }
     }
 
-    async genPlot() {
+    async genPlotWord() {
         await this.props.fetchPlotWord();
+        
         this.setState ({
-            text: [...this.state.text, this.props.plot.word]
+            text: [...this.state.text, this.props.plot_word.word]
+        })
+    }
+
+    async genPlotPoint() {
+        await this.props.fetchPlotPoint();
+        this.setState ({
+            text: [...this.state.text, this.props.plot_point.point]
         })
     }
 
@@ -58,17 +70,23 @@ class Char_Generator extends React.Component {
                 <div className="generator-page">
                     <div className="gen-btns">
                         <div onClick={() => this.genNewChar()}><img src="assets/gen_char.png" className="gen-btn" /></div>
+                        <div onClick={() => this.genPlotWord()}><img src="assets/gen_plot_word.png" className="gen-btn" /></div>
+                        <div onClick={() => this.genPlotPoint()}><img src="assets/gen_plot_point.png" className="gen-btn" /></div>
                         <div onClick={() => this.regenLast()}><img src="assets/regen_last.png" className="gen-btn" /></div>
-                        <div onClick={() => this.genPlot()}><img src="assets/gen_plot.png" className="gen-btn" /></div>
                     </div>
                         {(this.state.text) ?
                         <div>
                             { this.state.text.map((item, i) => {
                                 return (
                                     <div key={i}>
-                                        { item.type == 'plot' ?
+                                        { item.type == 'plot_word' ?
                                             <div className="single-plot">
                                                 { item.word }
+                                            </div>
+                                        :
+                                        item.type == 'plot_point' ?
+                                            <div className="single-plot">
+                                                { item.point }
                                             </div>
                                         :
                                             <div>
@@ -324,7 +342,8 @@ const mapStateToProps = (state) => {
         // })}</h5>
 
         new_char: state.char_generator.new_char,
-        plot: state.char_generator.plot
+        plot_word: state.char_generator.plot_word,
+        plot_point: state.char_generator.plot_point
     }
 }
 
@@ -332,7 +351,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchNewCharacter: () => dispatch(fetchNewCharacter()),
         clearCharacters: () => dispatch(clearCharacters()),
-        fetchPlotWord: () => dispatch(fetchPlotWord())
+        fetchPlotWord: () => dispatch(fetchPlotWord()),
+        fetchPlotPoint: () => dispatch(fetchPlotPoint())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Char_Generator);

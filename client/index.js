@@ -2,9 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import Home from './components/Home';
-import Nav_Bar_Small from './components/Nav_Bar_Small';
-import Nav_Bar_Home from './components/Nav_Bar_Home';
-import Nav_Bar_Full from './components/Nav_Bar_Full';
+import Nav_Bar from './components/Nav_Bar';
 import Generator_Home from './components/Generators/Generator_Home';
 import Char_Generator from './components/Generators/Char_Generator';
 import Form_Home from './components/Forms/Form_Home';
@@ -18,13 +16,10 @@ import store from './reducers';
 
 function App() {
     const location = useLocation();
-    // const nav_bar = location.pathname === "/" ? <Nav_Bar_Home /> : <Nav_Bar_Small />;
-    // const nav_bar = location.pathname === "/" ? <Nav_Bar_Home /> : <Nav_Bar_Full />;
-    const nav_bar = <Nav_Bar_Home />
+    const nav_bar = <Nav_Bar />
     
     return (
         <div className="full-page">
-            {/* <Nav_Bar_Small /> */}
             <Routes>
                 <Route path='/' element={<Home />}/>
 

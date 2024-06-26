@@ -10,6 +10,7 @@ const { Skills } = require('../server/db/models/skills');
 const { Wildcards } = require('../server/db/models/wildcards');
 
 const { Plot_Words } = require('../server/db/models/plot_words');
+const { Plot_Points } = require('../server/db/models/plot_points');
 
 const characters_data = [
     {
@@ -651,6 +652,31 @@ const plot_words_data = [
     { element: 'egg' },
 ]
 
+const plot_points_data = [
+    { element: `They encounter somebody from their past.` },
+    { element: `They encounter an angry, wild animal.` },
+    { element: `They witnesses somebody have a serious medical incident.` },
+    { element: `They get in an accident.` },
+    { element: `They receive news that somebody has died.` },
+    { element: `They find something they have been looking for for a long time.` },
+    { element: `They lose $10.` },
+    { element: `They encounter a past rival.` },
+    { element: `They get stuck in a sudden storm.` },
+    { element: `They become very tired.` },
+    { element: `They witness an unspeakable cosmic horror.` },
+    { element: `They witness an act of magic.` },
+    { element: `They perform an act of magic.` },
+    { element: `There is a fire.` },
+    { element: `They hear a murderer is on the loose and in their area.` },
+    { element: `They swallow a bug.` },
+    { element: `Something smells awful.` },
+    { element: `Somebody begins screaming for help.` },
+    { element: `They fall in love at first sight.` },
+    { element: `A stranger approaches them and claims to know them.` },
+    { element: `They suddenly crave a bagel.` },
+
+]
+
 
 
 async function seed() {
@@ -687,6 +713,9 @@ async function seed() {
 
     for (word of plot_words_data) {
         await Plot_Words.create(word);
+    }
+    for (point of plot_points_data) {
+        await Plot_Points.create(point);
     }
 }
 

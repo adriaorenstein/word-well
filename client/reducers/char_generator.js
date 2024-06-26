@@ -3,6 +3,7 @@ import axios from 'axios';
 const GET_NEW_CHARACTER = "GET_NEW_CHARACTER";
 const CLEAR_CHARACTERS = "CLEAR_CHARACTERS";
 const GET_PLOT_WORD = "GET_PLOT_WORD";
+const GET_PLOT_POINT = "GET_PLOT_POINT";
 
 const gotNewCharacter = (new_char) => ({
     type: GET_NEW_CHARACTER,
@@ -16,6 +17,11 @@ const clearingCharacters = () => ({
 const gotPlotWord = (word) => ({
     type: GET_PLOT_WORD,
     word
+})
+
+const gotPlotPoint = (point) => ({
+    type: GET_PLOT_POINT,
+    point
 })
 
 export const fetchNewCharacter = () => async (dispatch) => {
@@ -63,6 +69,15 @@ export const fetchPlotWord = () => async (dispatch) => {
     }
 }
 
+export const fetchPlotPoint = () => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/api/plot_generator/get-plot-point`);
+        dispatch(gotPlotPoint(data));
+    } catch (err) {
+        console.log('error fetching plot point');
+    }
+}
+
 const initialState = {
     new_char: {
         type: 'char',
@@ -78,9 +93,13 @@ const initialState = {
         skills: [],
         wildcard: []
     },
-    plot: {
-        type: 'plot',
+    plot_word: {
+        type: 'plot_word',
         word: ''
+    },
+    plot_point: {
+        type: 'plot_point',
+        point: ``
     }
 }
 
@@ -91,9 +110,14 @@ export default function (state = initialState, action) {
         case CLEAR_CHARACTERS:
             return { initialState }
         case GET_PLOT_WORD:
-            return { ...state, plot: {
-                ...state.plot,
+            return { ...state, plot_word: {
+                ...state.plot_word,
                 word: action.word
+            }}
+        case GET_PLOT_POINT:
+            return { ...state, plot_point: {
+                ...state.plot_point,
+                point: action.point
             }}
         default:
             return state;
