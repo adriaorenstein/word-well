@@ -4,13 +4,6 @@ import games from './games';
 //import {thunkMiddleware} from 'redux-thunk';
 import { thunk } from 'redux-thunk'
 
-// const store = configureStore({
-//     reducer: {
-//         generator
-//     },
-//     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware)
-// });
-
 const store = configureStore({
     reducer: {
         char_generator
