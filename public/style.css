@@ -138,39 +138,53 @@ html,
 }
 
 .gen-scroll {
-    width: 430px;
-    margin-left: 50px;
+    width: 520px;
+    height: 700px;
+    margin-left: 30px;
     margin-top: -30px;
 }
 
 .gen-btns {
     display: flex;
-    flex-direction: column;
-    gap: 70px;
-    margin-top: -550px;
-    margin-left: 450px;
+    /* flex-direction: column; */
+    gap: 90px;
+    margin-top: -575px;
+    margin-left: 110px;
 }
 
 .gen-btn {
     flex-basis: 5%;
     height: 50px;
-    border-radius: 20%;
-    box-shadow: 2px 2px 2px black;
-    /* background-image: url("assets/home_btn.jpg"); */
-    background-size: 100%;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px 1px black;
+    background-color: #e6641f;
+    padding: 5px;
+    /* background-color: #80d3e1; */
     position: absolute;
     cursor: pointer;
 }
+
+.gen-btn:hover {
+    background-color: #eb9262;
+}
+
+/* .scroll-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-basis: content;
+    overflow: auto;
+    height: 380px;
+} */
 
 .gen-text {
     display: flex;
     flex-direction: column;
     flex-basis: content;
+    overflow: auto;
+    height: 380px;
     margin-left: 120px;
-    margin-top: -210px;
-    width: 300px;
-    height: 410px;
-    overflow: scroll;
+    margin-top: 70px;
+    width: 350px;
 
 }
 

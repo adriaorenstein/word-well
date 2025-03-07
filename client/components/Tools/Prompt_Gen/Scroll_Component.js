@@ -3,7 +3,7 @@ import { fetchNewCharacter, clearCharacters, fetchPlotWord, fetchPlotPoint } fro
 
 import { connect } from 'react-redux';
 
-class Prompt_Gen extends React.Component {
+class Scroll_Component extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +26,7 @@ class Prompt_Gen extends React.Component {
     }
 
     scrollToBottom = () => {
-        // this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
 
     async genNewChar() {
@@ -71,8 +71,7 @@ class Prompt_Gen extends React.Component {
 
     render() {
         return (
-            <div className="bg-gen">
-                <img src="assets/tools/prompt_gen/scroll.png" className="gen-scroll"></img>
+            <div className="gen-scroll">
                 <div className="gen-btns">
                     <div onClick={() => this.genNewChar()}><img src="assets/tools/prompt_gen/gen_char_btn.png" className="gen-btn" /></div>
                     <div onClick={() => this.genPlotWord()}><img src="assets/tools/prompt_gen/gen_pw_btn.png" className="gen-btn" /></div>
@@ -227,4 +226,4 @@ const mapDispatchToProps = (dispatch) => {
         fetchPlotPoint: () => dispatch(fetchPlotPoint())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Prompt_Gen);
+export default connect(mapStateToProps, mapDispatchToProps)(Scroll_Component);
