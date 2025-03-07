@@ -7,17 +7,29 @@ class Nav_Bar extends React.Component {
         return (
             <div className="nav-bar">
                 <Link to='/'>
-                    <img src="assets/transparent.png" className="nav-btn nav-btn-home" />
+                    <img src="assets/nav/logo.png" className="nav-logo"></img>
                 </Link>
-                <Link to='/char-generator'>
-                    <img src="assets/transparent.png" className="nav-btn nav-btn-generate" />
+                <Link to='/in-progress'>
+                    <img src="assets/nav/forum_btn.png" className="nav-btn" />
                 </Link>
-                {/* <Link to='/form-home'>
-                    <img src="assets/transparent.png" className="nav-btn nav-btn-contribute" />
+                <Link to='/in-progress'>
+                    <img src="assets/nav/contests_btn.png" className="nav-btn" />
                 </Link>
-                <Link to='/games-home'>
-                    <img src="assets/transparent.png" className="nav-btn nav-btn-games" />
-                </Link> */}
+                <Link to='/in-progress'>
+                    <img src="assets/nav/blog_btn.png" className="nav-btn" />
+                </Link>
+                <Link to='/in-progress'>
+                    <img src="assets/nav/groups_btn.png" className="nav-btn" />
+                </Link>
+                <Link to='/in-progress'>
+                    <img src="assets/nav/library_btn.png" className="nav-btn" />
+                </Link>
+                <Link to='/tools'>
+                    <img src="assets/nav/tools_btn.png" className="nav-btn" />
+                </Link>
+                <Link to='/in-progress'>
+                    <img src="assets/nav/signin_btn.png" className="nav-btn nav-btn-signin" />
+                </Link>
             </div>
         )
     }

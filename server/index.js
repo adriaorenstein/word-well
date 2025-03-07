@@ -14,11 +14,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api', require('./api'));
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
+    console.log("Getting path...")
     res.sendFile(public_path + 'index.html');
 });
 
-app.get('*', function(req,res) {
+app.get('*', function (req, res) {
     res.sendFile(public_path + 'index.html');
 });
 
