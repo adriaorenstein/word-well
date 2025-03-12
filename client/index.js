@@ -23,6 +23,7 @@ function App() {
 
     return (
         <div className="full-page">
+            {nav_bar}
             <Routes>
                 <Route path='/' element={<Home />} />
 
@@ -41,7 +42,6 @@ function App() {
                 <Route path='/tools' element={<Tools />} />
                 <Route path='/prompt-gen' element={<Prompt_Gen />} />
             </Routes>
-            {nav_bar}
         </div>
     )
 }

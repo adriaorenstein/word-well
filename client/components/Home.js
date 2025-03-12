@@ -8,6 +8,7 @@ class Home extends React.Component {
             <div>
                 <div className="bg-home">
                     <img src="assets/home/scroll.png" className="home-scroll"></img>
+
                     <img src="assets/home/home_header_text.png" className="home-scroll-header"></img>
                     <img src="assets/home/under_construction.png" className="home-scroll-img"></img>
                     <div className="home-scroll-text">

@@ -6,10 +6,10 @@ const db = new Sequelize(db_URL /*+ '/word-well'*/, {
     logging: false,
     dialectOptions: {
         // FOR HEROKU: uncomment this
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
+        // ssl: {
+        //     require: true,
+        //     rejectUnauthorized: false
+        // }
     }
 });
 

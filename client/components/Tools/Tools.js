@@ -5,7 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 class Tools extends React.Component {
     render() {
         return (
-            <div className="tools-container">
+            <div>
                 <div className="bg-tools">
                     <Link to='/prompt-gen'><img src="assets/tools/gen_icon.png" className="tools-icon"></img></Link>
                 </div>
